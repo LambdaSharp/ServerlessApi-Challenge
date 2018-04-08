@@ -50,7 +50,7 @@ Pre-requisites
 
 Level 0 - Deploy the API 
 ------------------------
-With serverless is quite simple to deploy your first API! You need a configuration file `serverless.yml` and package with your code to be deployed to lambda. Simply compile+package the code and call the serverless deploy command!
+With serverless is quite simple to deploy your first API! You need a configuration file `serverless.yml` and a package with your code. Simply compile + package the code and call the serverless deploy command!
 
 ```
 dotnet build
@@ -67,7 +67,7 @@ A conveniende script to wrapp the dotnet calls is also provided so you only have
 ```
 
 
-One the stack has been created, serverless will output information about the service you just created:
+Once the stack has been created, serverless will output information about the service:
 ```
 Serverless: Stack update finished...
 Service Information
@@ -111,7 +111,7 @@ To implement the create function, we will need to create a DynamoDB table.
 
 ### Add create function configuration
 * Under the `functions` section add a new definition for the create function.
-* Set the handler to point to the create function
+* Set the handler to point to the "create" function: `Assembly::Namespace.ClassName::MethodName`
 * Set the http method to `post`
 * The path should be `item`
 
@@ -120,8 +120,8 @@ To implement the create function, we will need to create a DynamoDB table.
 * Run `serverless deploy`
 * Go to the AWS Console and take a look at the table that was just generated
 
-Level 2 - Create Function
--------------------------
+Level 2 - The Create Function
+------------------------------
 
 Now that we have the required infrastructure in place, we need to modify the create function so we can start adding items to our application.
 
@@ -129,7 +129,7 @@ Now that we have the required infrastructure in place, we need to modify the cre
 Microbe items contains an `id` and a `title`. You can add any additional information such as `content`, `date`, `author`, and anything else you may want.
 Once you are done, re-deploy the function using serverless.
 
-* Put an item to dynamo using a unique Id, an unique Title, Content and any other information you want to include
+* [Put](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItemsDocumentClasses.html#PutMidLevelDotNet) an item to dynamo using a unique Id, an unique Title, Content and any other information you want to include
 * Return a `APIGatewayProxyResponse`. You can include a body, headers, a status and other infomration in this object.
 
 <details>
