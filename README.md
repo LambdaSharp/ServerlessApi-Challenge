@@ -121,6 +121,8 @@ To implement the create function, we will need to create a DynamoDB table.
 * Go to the AWS Console and take a look at the table that was just generated
 
 Level 2 - Create Function
+-------------------------
+
 Now that we have the required infrastructure in place, we need to modify the create function so we can start adding items to our application.
 
 ### Update the create function to `put` an item in the table
