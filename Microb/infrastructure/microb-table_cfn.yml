@@ -1,0 +1,64 @@
+Parameters:
+  TableName:
+    Type: String
+    Default: MicrobItems
+    Description: The name of the dynamodb table
+  PartitionKey:
+    Type: String
+    Default: Id
+    Description: The name of the main parition key
+  SecondaryIndex:
+    Type: String
+    Default: Title
+    Description: The name of the secondary index
+  ReadCapacityUnits:
+    Default: 5
+    Description: Dynamo read capacity units
+    Type: Number
+  WriteCapacityUnits:
+    Default: 5
+    Description: Dynamo write capacity units
+    Type: Number
+
+
+Resources:
+
+  DynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName:
+        Ref: TableName
+
+      AttributeDefinitions:
+      - AttributeName:
+          Ref: PartitionKey
+        AttributeType: S
+      - AttributeName:
+          Ref: SecondaryIndex
+        AttributeType: S
+
+      KeySchema:
+      - AttributeName:
+          Ref: PartitionKey
+        KeyType: HASH
+
+      GlobalSecondaryIndexes:
+      - IndexName:
+          Ref: SecondaryIndex
+        KeySchema:
+        - AttributeName:
+            Ref: SecondaryIndex
+          KeyType: HASH
+        Projection:
+          ProjectionType: ALL
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+      ProvisionedThroughput:
+        ReadCapacityUnits:
+          Ref: ReadCapacityUnits
+        WriteCapacityUnits:
+          Ref: WriteCapacityUnits
+
+

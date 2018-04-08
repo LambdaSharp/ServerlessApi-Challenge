@@ -1,0 +1,50 @@
+service: microb-challenge
+
+provider:
+  name: aws
+  runtime: dotnetcore2.0
+  profile: ${opt:profile, 'default'}
+  timeout: 30
+  versionFunctions: false
+  stage: dev
+  region: us-east-1
+#  iamRoleStatements:
+#    - Effect: Allow
+#      Action:
+#        - # TODO Add permissions to interact with DynamoDB
+#      Resource:
+#        - Fn::GetAtt: [ DynamoDBTable, Arn ]
+#        - Fn::Join: ["/", [ Fn::GetAtt: [DynamoDBTable, Arn], "index", "*"]]
+
+# you can define service wide environment variables here
+  environment:
+    STAGE_NAME: ${self:custom.stageName}
+#    DYNAMOTABLE_NAME:
+#      Ref: # TODO Reference the CloudFormation dynamo table here
+
+# Custom values that can be referenced in the Cloud Formation template
+custom:
+  stageName: ${opt:stage, self:provider.stage}
+  
+  
+package:
+  artifact: bin/release/netcoreapp2.0/deploy-package.zip
+  
+
+functions:
+
+  # functions
+  list-microb:
+    handler: ServerlessApi::Microb.List.Function::LambdaHandler # Assembly::Namespace.ClassName::MethodName
+    events:
+      - http:
+          path: "item"
+          method: "get"
+
+  # TODO Add missing functions (Create, Read, Update, Delete)
+
+# you can add CloudFormation resource templates here
+#resources:
+#  Parameters: # TODO include the parameter section from the infrastructure/microb-table_cfn.yml file
+#  Resources:
+#    DynamoDBTable: # TODO include the DynamoDBTable section from the infrastructure/microb-table_cfn.yml file

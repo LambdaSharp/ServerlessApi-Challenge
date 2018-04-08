@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>ServerlessApi</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Amazon.Lambda.APIGatewayEvents" Version="1.1.2" />
+    <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.2.0" />
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.7.1" />
+    <DotNetCliToolReference Include="Amazon.Lambda.Tools" Version="2.1.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="test\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="test\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="test\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="infrastructure\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="infrastructure\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="infrastructure\**" />
+  </ItemGroup>
+</Project>
