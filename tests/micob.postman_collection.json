@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "c230ac0c-8282-4229-b4f7-add7285ea6af",
+		"name": "micob",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "09bdcc37-bd53-42ed-bb25-2b6ba7b45ab3",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {",
+							"    pm.response.to.have.status(202);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "*",
+						"disabled": true
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content\": \"Create Content\",\n\t\"title\": \"Create from postman\"\n}"
+				},
+				"url": {
+					"raw": "{{domain}}/items/",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"items",
+						""
+					]
+				},
+				"description": "\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5a1e1e55-d6fd-4764-8074-167f5ed04fd2",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "{{origin}}",
+						"disabled": true
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content\": \"Updates to Content\",\n\t\"title\": \"Update from postman\"\n}"
+				},
+				"url": {
+					"raw": "{{domain}}/items/5da988be-bc9d-41da-8bc1-c436c8c76bf7",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"items",
+						"5da988be-bc9d-41da-8bc1-c436c8c76bf7"
+					]
+				},
+				"description": "\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "320fd45d-5148-4eb9-a29e-5e6ec096836a",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "{{origin}}",
+						"disabled": true
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{domain}}/items/5da988be-bc9d-41da-8bc1-c436c8c76bf7",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"items",
+						"5da988be-bc9d-41da-8bc1-c436c8c76bf7"
+					]
+				},
+				"description": "\n"
+			},
+			"response": []
+		},
+		{
+			"name": "List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "61e37b16-b1e7-4ab0-a142-4ff53e312844",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "{{origin}}",
+						"disabled": true
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{domain}}/items",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"items"
+					]
+				},
+				"description": "\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1ca3efc5-a119-481c-b6a2-63fe87dd3579",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "{{origin}}",
+						"disabled": true
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{domain}}/items/5da988be-bc9d-41da-8bc1-c436c8c76bf7",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"items",
+						"5da988be-bc9d-41da-8bc1-c436c8c76bf7"
+					]
+				},
+				"description": "\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Gone",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8dbf0725-ef5c-43d2-9375-d4f411468d32",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 410\", function () {",
+							"    pm.response.to.have.status(410);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "{{origin}}",
+						"disabled": true
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{domain}}/items/dabb518f-235b-4c07-9748-0fe6dacafec2",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"items",
+						"dabb518f-235b-4c07-9748-0fe6dacafec2"
+					]
+				},
+				"description": "\n"
+			},
+			"response": []
+		}
+	]
+}
