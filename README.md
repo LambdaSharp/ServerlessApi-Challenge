@@ -3,7 +3,6 @@
 
 This challenge is about using the [Serverless Framework](https://serverless.com/framework/) to create a Serverless REST API using API Gateway and Lambda.
 
-Using the serverless framework, will be creating a simple micro bloging platform using only serverless servicess.
 
 Pre-requisites
 --------------
@@ -108,8 +107,9 @@ To implement the create function, we will need to create a DynamoDB table.
   * delete
   * query 
   * scan
+  * describe table
 
-### Add create function configuration
+### Add a create function configuration
 * Under the `functions` section add a new definition for the create function.
 * Set the handler to point to the "create" function: `Assembly::Namespace.ClassName::MethodName`
 * Set the http method to `post`
@@ -167,11 +167,7 @@ Now that your API is up and running we want to make sure that only authorized ca
 
 Boss Level - Calling your API from a website (Enabling CORS)
 ---------------------------------------------------------
-
 * Create a static website use the `infrastructure/static-website_cfn.yml`, and include all the the resources into your `serverless.yml` resources section
 * [Enable CORS](https://serverless.com/blog/cors-api-gateway-survival-guide/) for your APIs.
 * Ensure that your functions return the proper headers
-* In the `html` directory, modify the `configuration.js` file
-  * Set the correct `api_url`
-* Upload the `html` directory to your website bucket
- 
+* Upload all html and js files to your website bucket!
