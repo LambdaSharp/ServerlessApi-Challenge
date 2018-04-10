@@ -32,22 +32,16 @@ namespace Microb.List {
         }
 
         private async Task<IEnumerable<MicrobItem>> GetItems() {
-            try {
-                var request = new ScanRequest {
-                    TableName = _tableName
-                };
-                var response = await _dynamoClient.ScanAsync(request);
-                return response.Items.Select(x => new MicrobItem {
-                    id = x["Id"].S,
-                    title = x["Title"].S,
-                    content = x["content"].S,
-                    date = x["DateCreated"].S
-                });
-            }
-            catch (Exception e) {
-                LambdaLogger.Log($"*** ERROR: {e}");
-                throw e;
-            }
+            var request = new ScanRequest {
+                TableName = _tableName
+            };
+            var response = await _dynamoClient.ScanAsync(request);
+            return response.Items.Select(x => new MicrobItem {
+                id = x["Id"].S,
+                title = x["Title"].S,
+                content = x["content"].S,
+                date = x["DateCreated"].S
+            });
         }
     }
 }
