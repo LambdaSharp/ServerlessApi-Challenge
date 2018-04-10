@@ -30,19 +30,14 @@ namespace Microb.Delete {
         }
 
         private async Task<bool> DeleteItem(string id) {
-            try {
-                DeleteItemOperationConfig config = new DeleteItemOperationConfig {
-                    // Return the deleted item.
-                    ReturnValues = ReturnValues.AllOldAttributes
-                };
-                var document = await _table.DeleteItemAsync(id, config);
-                LambdaLogger.Log($"*** INFO: Deleted item {id}" );
-                return true;
-            }
-            catch (Exception e) {
-                LambdaLogger.Log($"*** ERROR: {e}");
-                return false;
-            }
+            DeleteItemOperationConfig config = new DeleteItemOperationConfig {
+
+                // Return the deleted item.
+                ReturnValues = ReturnValues.AllOldAttributes
+            };
+            var document = await _table.DeleteItemAsync(id, config);
+            LambdaLogger.Log($"*** INFO: Deleted item {id}" );
+            return true;
         }
     }
 }
