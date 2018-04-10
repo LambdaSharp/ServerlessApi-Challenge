@@ -15,25 +15,24 @@ namespace Microb.Read {
             try {
                 // TODO Read single item
                 return new APIGatewayProxyResponse {
-                    Body = "{\"message\": \"TODO\"}",
                     StatusCode = 200
                 };
             }
             catch (Exception e) {
                 LambdaLogger.Log($"*** ERROR: {e}");
                 return new APIGatewayProxyResponse {
-                    Body = "{\"message\": \"{e.message}\"}",
+                    Body = e.Message,
                     StatusCode = 500
                 };
             }
         }
 
         private async Task<MicrobItem> GetItem(string id) {
-            var response = await _table.GetItemAsync("Id", id);
+            var response = await _table.GetItemAsync(id);
             return new MicrobItem {
                 id = response["Id"],
                 title = response["Title"],
-                content = response["content"],
+                content = response["Content"],
                 date = response["DateCreated"]
             };
         }

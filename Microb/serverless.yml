@@ -19,7 +19,7 @@ provider:
 # you can define service wide environment variables here
   environment:
     STAGE_NAME: ${self:custom.stageName}
-#    DYNAMOTABLE_NAME:
+#    DYNAMO_TABLE_NAME:
 #      Ref: # TODO Reference the CloudFormation dynamo table here
 
 # Custom values that can be referenced in the Cloud Formation template
@@ -38,7 +38,7 @@ functions:
     handler: ServerlessApi::Microb.List.Function::LambdaHandler # Assembly::Namespace.ClassName::MethodName
     events:
       - http:
-          path: "item"
+          path: "items"
           method: "get"
 
   # TODO Add missing functions (Create, Read, Update, Delete)

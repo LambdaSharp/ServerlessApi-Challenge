@@ -16,14 +16,13 @@ namespace Microb.Delete {
             try {
                 // TODO Delete an item
                 return new APIGatewayProxyResponse {
-                    Body = "{\"message\": \"TODO\"}",
                     StatusCode = 200
                 };
             }
             catch (Exception e) {
                 LambdaLogger.Log($"*** ERROR: {e}");
                 return new APIGatewayProxyResponse {
-                    Body = "{\"message\": \"{e.message}\"}",
+                    Body = e.Message,
                     StatusCode = 500
                 };
             }
@@ -35,7 +34,7 @@ namespace Microb.Delete {
                 // Return the deleted item.
                 ReturnValues = ReturnValues.AllOldAttributes
             };
-            var document = await _table.DeleteItemAsync(id, config);
+            await _table.DeleteItemAsync(id, config);
             LambdaLogger.Log($"*** INFO: Deleted item {id}" );
             return true;
         }

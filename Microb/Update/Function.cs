@@ -16,14 +16,13 @@ namespace Microb.Update {
             try {
                 // TODO Read single item
                 return new APIGatewayProxyResponse {
-                    Body = "{\"message\": \"TODO\"}",
                     StatusCode = 200
                 };
             }
             catch (Exception e) {
                 LambdaLogger.Log($"*** ERROR: {e}");
                 return new APIGatewayProxyResponse {
-                    Body = "{\"message\": \"{e.message}\"}",
+                    Body = e.Message,
                     StatusCode = 500
                 };
             }
@@ -31,10 +30,10 @@ namespace Microb.Update {
 
         private async Task UpdateItem(string id, string title, string content) {
             var item = new Document();
-            item["Id"] = id.ToString();
+            item["Id"] = id;
             item["Title"] = title;
             item["Content"] = content;
-            _table.UpdateItemAsync(item);
+            await _table.UpdateItemAsync(item);
         }
     }
 }

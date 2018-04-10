@@ -25,7 +25,7 @@ namespace Microb.List {
             catch (Exception e) {
                 LambdaLogger.Log($"*** ERROR: {e}");
                 return new APIGatewayProxyResponse {
-                    Body = "{\"message\": \"{e.message}\"}",
+                    Body = e.Message,
                     StatusCode = 500
                 };
             }
@@ -39,7 +39,7 @@ namespace Microb.List {
             return response.Items.Select(x => new MicrobItem {
                 id = x["Id"].S,
                 title = x["Title"].S,
-                content = x["content"].S,
+                content = x["Content"].S,
                 date = x["DateCreated"].S
             });
         }

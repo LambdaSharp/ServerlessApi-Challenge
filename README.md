@@ -158,6 +158,10 @@ Repete the steps above but for all the other functions
 * list
 </details>
 
+> **BONUS POINTS**:
+>
+> Make update be an [idempotent operation](https://restfulapi.net/idempotent-rest-apis/).
+
 
 Level 4 - Secure your API
 ----------------------------
