@@ -175,3 +175,9 @@ Boss Level - Calling your API from a website (Enabling CORS)
 * [Enable CORS](https://serverless.com/blog/cors-api-gateway-survival-guide/) for your APIs.
 * Ensure that your functions return the proper headers
 * Upload all html and js files to your website bucket!
+
+Architecture
+------------
+
+![serverless api architecture 1](https://user-images.githubusercontent.com/532616/38775489-9896bd4c-4038-11e8-95db-b3c6cc718660.png)
+
