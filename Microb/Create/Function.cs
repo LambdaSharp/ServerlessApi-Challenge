@@ -18,14 +18,16 @@ namespace Microb.Create {
                 var id = await CreateItem(item.title, item.content);
                 return new APIGatewayProxyResponse {
                     Body = "{\"id\": \"" + id + "\"}",
-                    StatusCode = 200
+                    StatusCode = 200,
+                    Headers = corsHeaders
                 };
             }
             catch (Exception e) {
                 LambdaLogger.Log($"*** ERROR: {e}");
                 return new APIGatewayProxyResponse {
                     Body = e.Message,
-                    StatusCode = 500
+                    StatusCode = 500,
+                    Headers = corsHeaders
                 };
             }
         }

@@ -1,4 +1,5 @@
-﻿using Amazon;
+﻿using System.Collections.Generic;
+using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.Lambda.Core;
@@ -13,6 +14,7 @@ namespace Microb {
         protected readonly RegionEndpoint _regionEndpoint;
         protected readonly AmazonDynamoDBClient _dynamoClient;
         protected readonly Table _table;
+        protected readonly Dictionary<string, string> corsHeaders = new Dictionary<string, string> {{"Access-Control-Allow-Origin", "*"}, {"Access-Control-Allow-Credentials", "true"}};
         
         //--- Constructors ---
         public MicrobFunction() {

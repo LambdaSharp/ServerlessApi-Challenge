@@ -1,5 +1,6 @@
 ﻿﻿using System;
-using System.Threading.Tasks;
+ using System.Collections.Generic;
+ using System.Threading.Tasks;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using Newtonsoft.Json;
@@ -16,14 +17,16 @@ namespace Microb.Read {
                 var response = await GetItem(request.PathParameters["id"]);
                 return new APIGatewayProxyResponse {
                     Body = JsonConvert.SerializeObject(response),
-                    StatusCode = 200
+                    StatusCode = 200,
+                    Headers = corsHeaders
                 };
             }
             catch (Exception e) {
                 LambdaLogger.Log($"*** ERROR: {e}");
                 return new APIGatewayProxyResponse {
                     Body = e.Message,
-                    StatusCode = 500
+                    StatusCode = 500,
+                    Headers = corsHeaders
                 };
             }
         }

@@ -18,14 +18,16 @@ namespace Microb.Update {
                 var item = JsonConvert.DeserializeObject<MicrobItem>(request.Body);
                 await UpdateItem(itemId, item.title, item.content);
                 return new APIGatewayProxyResponse {
-                    StatusCode = 200
+                    StatusCode = 200,
+                    Headers = corsHeaders
                 };
             }
             catch (Exception e) {
                 LambdaLogger.Log($"*** ERROR: {e}");
                 return new APIGatewayProxyResponse {
                     Body = e.Message,
-                    StatusCode = 500
+                    StatusCode = 500,
+                    Headers = corsHeaders
                 };
             }
         }

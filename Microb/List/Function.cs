@@ -19,14 +19,16 @@ namespace Microb.List {
                 var response = await GetItems();
                 return new APIGatewayProxyResponse {
                     Body = JsonConvert.SerializeObject(response),
-                    StatusCode = 200
+                    StatusCode = 200,
+                    Headers = corsHeaders
                 };
             }
             catch (Exception e) {
                 LambdaLogger.Log($"*** ERROR: {e}");
                 return new APIGatewayProxyResponse {
                     Body = e.Message,
-                    StatusCode = 500
+                    StatusCode = 500,
+                    Headers = corsHeaders
                 };
             }
         }
