@@ -6,21 +6,27 @@ provider:
   profile: ${opt:profile, 'default'}
   timeout: 30
   versionFunctions: false
-  stage: dev
-  region: us-east-1
-#  iamRoleStatements:
-#    - Effect: Allow
-#      Action:
-#        - # TODO Add permissions to interact with DynamoDB
-#      Resource:
-#        - Fn::GetAtt: [ DynamoDBTable, Arn ]
-#        - Fn::Join: ["/", [ Fn::GetAtt: [DynamoDBTable, Arn], "index", "*"]]
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:GetItem
+        - dynamodb:DeleteItem
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:DescribeTable
+      Resource:
+        - Fn::GetAtt: [ DynamoDBTable, Arn ]
+        - Fn::Join: ["/", [ Fn::GetAtt: [DynamoDBTable, Arn], "index", "*"]]
 
 # you can define service wide environment variables here
   environment:
     STAGE_NAME: ${self:custom.stageName}
-#    DYNAMOTABLE_NAME:
-#      Ref: # TODO Reference the CloudFormation dynamo table here
+    DYNAMO_TABLE_NAME:
+      Ref: DynamoDBTable
 
 # Custom values that can be referenced in the Cloud Formation template
 custom:
@@ -32,19 +38,39 @@ package:
   
 
 functions:
-
-  # functions
-  list-microb:
-    handler: ServerlessApi::Microb.List.Function::LambdaHandler # Assembly::Namespace.ClassName::MethodName
+  get-microb:
+    handler: ServerlessApi::Microb.Read.Function::LambdaHandler
     events:
       - http:
-          path: "item"
+          path: "items/{id}"
           method: "get"
-
-  # TODO Add missing functions (Create, Read, Update, Delete)
+  list-microb:
+    handler: ServerlessApi::Microb.List.Function::LambdaHandler
+    events:
+      - http:
+          path: "items"
+          method: "get"
+  create-microb:
+    handler: ServerlessApi::Microb.Create.Function::LambdaHandler
+    events:
+      - http:
+          path: "items"
+          method: "post"
+  delete-microb:
+    handler: ServerlessApi::Microb.Delete.Function::LambdaHandler
+    events:
+      - http:
+          path: "items/{id}"
+          method: "delete"
+  update-microb:
+    handler: ServerlessApi::Microb.Update.Function::LambdaHandler
+    events:
+      - http:
+          path: "items/{id}"
+          method: "put"
 
 # you can add CloudFormation resource templates here
-#resources:
-#  Parameters: # TODO include the parameter section from the infrastructure/microb-table_cfn.yml file
-#  Resources:
-#    DynamoDBTable: # TODO include the DynamoDBTable section from the infrastructure/microb-table_cfn.yml file
+resources:
+  Parameters: ${file(infrastructure/microb-table_cfn.yml):Parameters}
+  Resources:
+    DynamoDBTable: ${file(infrastructure/microb-table_cfn.yml):Resources.DynamoDBTable}

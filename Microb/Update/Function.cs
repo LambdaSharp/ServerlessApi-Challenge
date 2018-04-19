@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.Lambda.APIGatewayEvents;
@@ -11,19 +11,20 @@ namespace Microb.Update {
         
         //--- Methods ---
         [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
-        public APIGatewayProxyResponse LambdaHandler(APIGatewayProxyRequest request) {
+        public async Task<APIGatewayProxyResponse> LambdaHandler(APIGatewayProxyRequest request) {
             LambdaLogger.Log(JsonConvert.SerializeObject(request));
             try {
-                // TODO Read single item
+                var itemId = request.PathParameters["id"];
+                var item = JsonConvert.DeserializeObject<MicrobItem>(request.Body);
+                await UpdateItem(itemId, item.title, item.content);
                 return new APIGatewayProxyResponse {
-                    Body = "{\"message\": \"TODO\"}",
                     StatusCode = 200
                 };
             }
             catch (Exception e) {
                 LambdaLogger.Log($"*** ERROR: {e}");
                 return new APIGatewayProxyResponse {
-                    Body = "{\"message\": \"{e.message}\"}",
+                    Body = e.Message,
                     StatusCode = 500
                 };
             }
@@ -31,10 +32,19 @@ namespace Microb.Update {
 
         private async Task UpdateItem(string id, string title, string content) {
             var item = new Document();
-            item["Id"] = id.ToString();
+            if (!await ItemExists(id)) {
+                var now = DateTime.Now.ToString("MM/dd/yyyy h:mm tt");
+                item["DateCreated"] = now;
+            }
+            item["Id"] = id;
             item["Title"] = title;
             item["Content"] = content;
-            _table.UpdateItemAsync(item);
+            await _table.UpdateItemAsync(item);
+        }
+
+        private async Task<bool> ItemExists(string id) {
+            var response = await _table.GetItemAsync(id);
+            return response != null;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Threading.Tasks;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
@@ -10,30 +10,30 @@ namespace Microb.Read {
         
         //--- Methods ---
         [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
-        public APIGatewayProxyResponse LambdaHandler(APIGatewayProxyRequest request) {
+        public async Task<APIGatewayProxyResponse> LambdaHandler(APIGatewayProxyRequest request) {
             LambdaLogger.Log(JsonConvert.SerializeObject(request));
             try {
-                // TODO Read single item
+                var response = await GetItem(request.PathParameters["id"]);
                 return new APIGatewayProxyResponse {
-                    Body = "{\"message\": \"TODO\"}",
+                    Body = JsonConvert.SerializeObject(response),
                     StatusCode = 200
                 };
             }
             catch (Exception e) {
                 LambdaLogger.Log($"*** ERROR: {e}");
                 return new APIGatewayProxyResponse {
-                    Body = "{\"message\": \"{e.message}\"}",
+                    Body = e.Message,
                     StatusCode = 500
                 };
             }
         }
 
         private async Task<MicrobItem> GetItem(string id) {
-            var response = await _table.GetItemAsync("Id", id);
+            var response = await _table.GetItemAsync(id);
             return new MicrobItem {
                 id = response["Id"],
                 title = response["Title"],
-                content = response["content"],
+                content = response["Content"],
                 date = response["DateCreated"]
             };
         }
