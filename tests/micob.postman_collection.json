@@ -74,7 +74,7 @@
 				}
 			],
 			"request": {
-				"method": "POST",
+				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -96,13 +96,13 @@
 					"raw": "{\n\t\"content\": \"Updates to Content\",\n\t\"title\": \"Update from postman\"\n}"
 				},
 				"url": {
-					"raw": "{{domain}}/items/5da988be-bc9d-41da-8bc1-c436c8c76bf7",
+					"raw": "{{domain}}/items/adfabcb7-dadd-4e98-866a-a418e128a735",
 					"host": [
 						"{{domain}}"
 					],
 					"path": [
 						"items",
-						"5da988be-bc9d-41da-8bc1-c436c8c76bf7"
+						"adfabcb7-dadd-4e98-866a-a418e128a735"
 					]
 				},
 				"description": "\n"
@@ -148,13 +148,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{domain}}/items/5da988be-bc9d-41da-8bc1-c436c8c76bf7",
+					"raw": "{{domain}}/items/adfabcb7-dadd-4e98-866a-a418e128a735",
 					"host": [
 						"{{domain}}"
 					],
 					"path": [
 						"items",
-						"5da988be-bc9d-41da-8bc1-c436c8c76bf7"
+						"adfabcb7-dadd-4e98-866a-a418e128a735"
 					]
 				},
 				"description": "\n"
@@ -251,13 +251,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{domain}}/items/5da988be-bc9d-41da-8bc1-c436c8c76bf7",
+					"raw": "{{domain}}/items/adfabcb7-dadd-4e98-866a-a418e128a735",
 					"host": [
 						"{{domain}}"
 					],
 					"path": [
 						"items",
-						"5da988be-bc9d-41da-8bc1-c436c8c76bf7"
+						"adfabcb7-dadd-4e98-866a-a418e128a735"
 					]
 				},
 				"description": "\n"
@@ -303,13 +303,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{domain}}/items/dabb518f-235b-4c07-9748-0fe6dacafec2",
+					"raw": "{{domain}}/items/adfabcb7-dadd-4e98-866a-a418e128a735",
 					"host": [
 						"{{domain}}"
 					],
 					"path": [
 						"items",
-						"dabb518f-235b-4c07-9748-0fe6dacafec2"
+						"adfabcb7-dadd-4e98-866a-a418e128a735"
 					]
 				},
 				"description": "\n"
